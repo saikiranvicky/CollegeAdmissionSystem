@@ -2,6 +2,7 @@ package com.cas;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +38,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
 		String username = request.getParameter("uname");
 		String password = request.getParameter("pword");
 		System.out.println("hello");
@@ -48,16 +51,14 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("http://localhost:8080/CollegeAdmissionSystem/register.html");
 		}else {
 			boolean pwd = loginDao.checkpassword(user);
-			if(!pwd) {
-				PrintWriter out = response.getWriter();
-				out.print("Incorrect Password.");
+			if(!pwd) {	
+				out.print("<p>Invalid Credentials!</p>");
+				response.sendRedirect("http://localhost:8080/CollegeAdmissionSystem/userlogin.html");
+				
 			}else {
-				response.sendRedirect("http://localhost:8080/CollegeAdmissionSystem/colleges.html");
+				response.sendRedirect("CollegeServlet"); 		
 			}
 		}
-//		response.setContentType("text/html");
-//		PrintWriter out = response.getWriter();
-//		out.print("Welcome");
 	}
 
 }

@@ -1,13 +1,15 @@
 package com.cas;
 
 public class CollegesPojo {
+	private int collegeId;
 	private String collegeName;
 	private String city;
 	private String state;
 	private String zipcode;
 	
-	public CollegesPojo(String collegeName, String city, String state, String zipcode) {
+	public CollegesPojo(int collegeId,String collegeName, String city, String state, String zipcode) {
 		super();
+		this.collegeId = collegeId;
 		this.collegeName = collegeName;
 		this.city = city;
 		this.state = state;
@@ -16,6 +18,13 @@ public class CollegesPojo {
 	
 	public CollegesPojo() {
 		super();
+	}
+	
+	public int getCollegeId() {
+		return collegeId;
+	}
+	public void setCollegeId(int collegeId) {
+		this.collegeId = collegeId;
 	}
 	
 	public String getCollegeName() {

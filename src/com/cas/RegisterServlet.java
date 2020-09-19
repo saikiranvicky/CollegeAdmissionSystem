@@ -32,27 +32,19 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		
-		UserPojo user = new UserPojo(email,username,password);
-		
+		String password = request.getParameter("password");	
+		UserPojo user = new UserPojo(email,username,password);	
 		LoginDao loginDao = new LoginDao();
 		boolean checkUser = loginDao.userCheck(user);
-		System.out.println(checkUser);
 		
 		if(!checkUser) {
 			String inserted = loginDao.insertUser(user);
 			System.out.println(inserted);
-			System.out.println(request.getContextPath());
-			response.sendRedirect("http://localhost:8080/CollegeAdmissionSystem/colleges.html");
-			//request.getRequestDispatcher("listofcolleges.jsp").forward(request, response);
+			response.sendRedirect("CollegeServlet");
 			
 		}else {
-			response.sendRedirect("http://localhost:8080/CollegeAdmissionSystem/colleges.html");
-			
+			response.sendRedirect("CollegeServlet");
 		}
-		
-		
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -61,49 +53,7 @@ public class RegisterServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		
-		
-//		 
-//		    try
-//		    {
-//		        String validateUser = loginDao.userValidate(user);
-//		 
-//		        if(validateUser.equals("Admin_Role"))
-//		        {
-//		            System.out.println("Admin's Home");
-//		 
-//		            HttpSession session = request.getSession(); //Creating a session
-//		            session.setAttribute("Admin", username); //setting session attribute
-//		            request.setAttribute("userName", username);
-//		 
-//		           // request.getRequestDispatcher("/JSP/Admin.jsp").forward(request, response);
-//		        }
-//		        else if(validateUser.equals("User_Role"))
-//		        {
-//		            System.out.println("User's Home");
-//		 
-//		            HttpSession session = request.getSession();
-//		            session.setMaxInactiveInterval(10*60);
-//		            session.setAttribute("User", username);
-//		            request.setAttribute("userName", username);
-//		 
-//		           // request.getRequestDispatcher("/JSP/User.jsp").forward(request, response);
-//		        }
-//		        else
-//		        {
-//		            System.out.println("Error message = "+validateUser);
-//		            request.setAttribute("errMessage", validateUser);
-//		 
-//		           // request.getRequestDispatcher("/JSP/Login.jsp").forward(request, response);
-//		        }
-//		    }
-////		    catch (IOException e1)
-////		    {
-////		        e1.printStackTrace();
-////		    }
-//		    catch (Exception e2)
-//		    {
-//		        e2.printStackTrace();
-//		    }
+
 	}
 
 }

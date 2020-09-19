@@ -2,7 +2,6 @@ package com.cas;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CollegeServlet
+ * Servlet implementation class DeleteCollegeServlet
  */
-@WebServlet("/CollegeServlet")
-public class CollegeServlet extends HttpServlet {
+@WebServlet("/DeleteCollegeServlet")
+public class DeleteCollegeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DeleteCollegeServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,21 +31,15 @@ public class CollegeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html");
+		int id = Integer.parseInt(request.getParameter("id"));
+		LoginDao dao = new LoginDao();
+		boolean result = dao.delete(id);
 		PrintWriter out = response.getWriter();
-		out.print("<html>");
-		out.print("<body style='background-color:#C5E1A5;'>");
-		out.print("<h2>List of Colleges</h2>");         
-        List<CollegesPojo> list= LoginDao.getAllColleges();
-        out.print("<table border='1' width='100%'");  
-        out.print("<tr><th>College ID</th><th>CollegeName</th><th>City</th><th>State</th><th>Zipcode</th></tr>");  
-        for(CollegesPojo c:list){  
-        	out.print("<tr><td>"+c.getCollegeId()+"</td><td>"+c.getCollegeName()+"</td><td>"+c.getCity()+"</td><td>"+c.getState()+
-        			"</td><td>"+c.getZipcode()+"</td><td><a href='DeleteCollegeServlet?id="+c.getCollegeId()+"'>Delete</a></td></tr>");  
-        }  
-        out.print("</table>");   
-        out.print("</body>");
-        out.print("</html>");
-        out.close();  		
+		if(!result) {
+			out.print("<p>Unable to Delete the Record</p>");
+		}else {
+			response.sendRedirect("CollegeServlet");
+		}
 	}
 
 	/**

@@ -4,9 +4,13 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style type="text/css">
+.h1 {
+        text-align: center;
+}
 body {
   background: #C5E1A5;
 }
+
 form {
   width: 60%;
   margin: 60px auto;
@@ -85,6 +89,7 @@ button:hover {
 </style>
 </head>
 <body>
+<h1 style = "text-align: center">College Admission System</h1> 
 <form action = "./registration" method = "post">
   <label>
     <p class="label-txt">ENTER YOUR EMAIL</p>
@@ -111,6 +116,10 @@ button:hover {
   </label>
   <br>
   <button type="submit">submit</button>
+  <br>
+  <br>
+  <p>Already a User ? <a href="http://localhost:8080/CollegeAdmissionSystem/userlogin.html">Login</a></p> 
 </form>
+
 </body>
 </html>
